@@ -11,10 +11,12 @@ sudo apt-get install -y git curl jq ripgrep ca-certificates unzip python3-pip
 
 dl() { curl -fsSL "$1" -o "$2"; }
 
+# resolve a release asset's download URL by regex from the GitHub API (survives naming drift)
+asset_url() { curl -fsSL "https://api.github.com/repos/$1/releases/latest" | jq -r ".assets[].browser_download_url | select(test(\"$2\"))" | head -1; }
+
 echo "[*] gitleaks"
-GL=$(curl -fsSL https://api.github.com/repos/gitleaks/gitleaks/releases/latest | jq -r '.tag_name'); GLV=${GL#v}
-dl "https://github.com/gitleaks/gitleaks/releases/download/${GL}/gitleaks_${GLV}_linux_x64.tar.gz" /tmp/gl.tgz
-tar -xzf /tmp/gl.tgz -C "$BIN" gitleaks && chmod +x "$BIN/gitleaks"
+GLURL=$(asset_url gitleaks/gitleaks 'linux_(x64|amd64)\\.tar\\.gz$')
+dl "$GLURL" /tmp/gl.tgz && tar -xzf /tmp/gl.tgz -C "$BIN" gitleaks && chmod +x "$BIN/gitleaks"
 
 echo "[*] trufflehog"
 curl -fsSL https://raw.githubusercontent.com/trufflesecurity/trufflehog/main/scripts/install.sh | sh -s -- -b "$BIN"
@@ -23,8 +25,8 @@ echo "[*] actionlint"
 curl -fsSL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash | bash -s -- latest "$BIN"
 
 echo "[*] osv-scanner"
-OSV=$(curl -fsSL https://api.github.com/repos/google/osv-scanner/releases/latest | jq -r '.tag_name')
-dl "https://github.com/google/osv-scanner/releases/download/${OSV}/osv-scanner_linux_amd64" "$BIN/osv-scanner" && chmod +x "$BIN/osv-scanner"
+OSVURL=$(asset_url google/osv-scanner 'linux_amd64$')
+dl "$OSVURL" "$BIN/osv-scanner" && chmod +x "$BIN/osv-scanner"
 
 echo "[*] semgrep (optional, for later deep pass)"
 pip3 install --user --quiet semgrep || echo "  (semgrep skipped)"
