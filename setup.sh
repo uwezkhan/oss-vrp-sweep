@@ -28,8 +28,14 @@ echo "[*] osv-scanner"
 OSVURL=$(asset_url google/osv-scanner 'linux_amd64$')
 dl "$OSVURL" "$BIN/osv-scanner" && chmod +x "$BIN/osv-scanner"
 
+echo "[*] zizmor (GitHub Actions security auditor — primary GHA analyzer)"
+sudo apt-get install -y pipx >/dev/null 2>&1 || pip3 install --user --quiet --break-system-packages pipx
+export PATH="$BIN:$PATH"
+pipx install zizmor >/dev/null 2>&1 || pipx install --force zizmor >/dev/null 2>&1 || echo "  (zizmor install failed; regex fallback will run)"
+pipx ensurepath >/dev/null 2>&1 || true
+
 echo "[*] semgrep (optional, for later deep pass)"
-pip3 install --user --quiet semgrep || echo "  (semgrep skipped)"
+pipx install semgrep >/dev/null 2>&1 || echo "  (semgrep skipped)"
 
 echo "[*] gh cli (optional, for dup-sweep / advisories)"
 if ! command -v gh >/dev/null; then
@@ -43,5 +49,5 @@ fi
 
 echo
 echo "[✓] Installed. Versions:"
-for t in git gitleaks trufflehog actionlint osv-scanner rg jq; do printf "  %-12s " "$t"; command -v "$t" >/dev/null && "$t" --version 2>/dev/null | head -1 || echo "MISSING"; done
+for t in git gitleaks trufflehog actionlint osv-scanner zizmor rg jq; do printf "  %-12s " "$t"; command -v "$t" >/dev/null && "$t" --version 2>/dev/null | head -1 || echo "MISSING"; done
 echo "Run 'source ~/.bashrc' (or reopen shell) so \$BIN is on PATH."

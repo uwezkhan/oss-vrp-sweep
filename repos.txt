@@ -1,24 +1,31 @@
-# Google OSS VRP sweep targets. Format: <slug> <tier> <priority>
-# priority A = solo-viable (tooling/agent frameworks: CI + logic bugs)
-# priority B = library, secrets+CI sweep only (OSS-Fuzz owns memory-safety; don't hand-hunt)
-google/osv-scanner       OT1 A
-google/go-github         OT1 A
-google/clusterfuzz       OT1 A
-google/adk-js            OT1 A
-google/adk-python        OT1 A
-google/adk-go            OT1 A
-google/adk-java          OT1 A
-google/go-cloud          OT1 A
-google/closure-compiler  OT1 A
-google/gson              OT0 B
-google/guava             OT0 B
-google/gvisor            OT0 B
-google/re2               OT1 B
-google/benchmark         OT1 B
-google/filament          OT1 B
-google/flatbuffers       OT1 B
-google/zerocopy          OT1 B
-google/shaderc           OT1 B
-google/libphonenumber    OT1 B
-google/brotli            OT1 B
-google/XNNPACK           OT1 B
+# Google OSS VRP sweep targets (batch 2). Format: <slug> <tier> <priority>
+# priority A = CI/build/release-heavy (highest EV for supply-chain findings)
+# priority B = library (secrets + zizmor GHA sweep; low hand-hunt value)
+# Big repos are shallow-cloned (DEPTH=1) so secrets = current-tree only.
+angular/dev-infra                    OT? A
+angular/angular-cli                  OT? A
+bazelbuild/continuous-integration    OT? A
+bazelbuild/bazel-central-registry    OT? A
+GoogleContainerTools/distroless      OT? A
+flutter/flutter                      OT? A
+golang/tools                         OT? A
+angular/angular                      OT? B
+angular/components                   OT? B
+bazelbuild/bazel                     OT? B
+protocolbuffers/protobuf             OT? B
+openthread/openthread                OT? B
+tink-crypto/tink-cc                  OT? B
+tink-crypto/tink-java                OT? B
+tink-crypto/tink-go                  OT? B
+golang/go                            OT? B
+golang/net                           OT? B
+golang/crypto                        OT? B
+golang/image                         OT? B
+golang/sync                          OT? B
+golang/text                          OT? B
+golang/sys                           OT? B
+fuchsia/fuchsia                      OT? B
+# already swept clean in batch 1 (re-scan with zizmor for confirmation):
+google/gson                          OT0 B
+google/guava                         OT0 B
+google/gvisor                        OT0 B

@@ -20,7 +20,7 @@ audit() {
   grep -qx "$slug" "$DONE" && { echo "[skip] $slug (done)"; return; }
   echo "=================== $slug ($tier) ==================="
   rm -rf "$dir"
-  if ! git clone --quiet "https://github.com/$slug" "$dir" 2>"$OUT/$name.clone.err"; then
+  if ! git clone --quiet --depth "${DEPTH:-1}" "https://github.com/$slug" "$dir" 2>"$OUT/$name.clone.err"; then
     echo "  clone FAILED"; echo "$slug | $tier | - | - | - | CLONE-FAIL" >> "$MASTER"; echo "$slug" >> "$DONE"; return
   fi
 
