@@ -7,6 +7,7 @@
 #   ONE=google/osv-scanner bash sweep.sh     # single repo
 #   KEEP=1 bash sweep.sh                      # never delete (debug)
 set -uo pipefail
+export GIT_TERMINAL_PROMPT=0 GCM_INTERACTIVE=never   # never block on auth prompts (e.g. non-GitHub repos)
 ROOT="$(cd "$(dirname "$0")" && pwd)"
 WORK="${WORK:-$ROOT/work}"; OUT="$ROOT/reports"; FLAGS="$ROOT/FLAGGED"
 mkdir -p "$WORK" "$OUT" "$FLAGS"
