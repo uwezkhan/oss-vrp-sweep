@@ -1,0 +1,24 @@
+# Google OSS VRP sweep targets. Format: <slug> <tier> <priority>
+# priority A = solo-viable (tooling/agent frameworks: CI + logic bugs)
+# priority B = library, secrets+CI sweep only (OSS-Fuzz owns memory-safety; don't hand-hunt)
+google/osv-scanner       OT1 A
+google/go-github         OT1 A
+google/clusterfuzz       OT1 A
+google/adk-js            OT1 A
+google/adk-python        OT1 A
+google/adk-go            OT1 A
+google/adk-java          OT1 A
+google/go-cloud          OT1 A
+google/closure-compiler  OT1 A
+google/gson              OT0 B
+google/guava             OT0 B
+google/gvisor            OT0 B
+google/re2               OT1 B
+google/benchmark         OT1 B
+google/filament          OT1 B
+google/flatbuffers       OT1 B
+google/zerocopy          OT1 B
+google/shaderc           OT1 B
+google/libphonenumber    OT1 B
+google/brotli            OT1 B
+google/XNNPACK           OT1 B
