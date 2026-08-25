@@ -19,6 +19,11 @@ if command -v zizmor >/dev/null 2>&1; then
           ((.message.text // "") | gsub("\\s+";" ")) ]
       | @tsv' \
     | while IFS=$'\t' read -r level rule loc msg; do
+        # Demote pure-hardening rules zizmor rates High but that aren't exploitable
+        # on their own (they stay visible as MED, but no longer trigger a FLAG).
+        if echo "$rule" | grep -qE 'unpinned-uses|excessive-permissions|artipacked'; then
+          [ "$level" = error ] && level=warning
+        fi
         case "$level" in
           error)   echo "*** HIGH [$rule] $loc — $msg" ;;
           warning) echo "== MED [$rule] $loc — $msg" ;;
