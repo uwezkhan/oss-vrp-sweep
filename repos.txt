@@ -1,7 +1,10 @@
-# Google OSS VRP sweep — batch 4.
-# priority A = less-flagship / less-audited (higher yield)
-cdapio/cdap                          OT? A
-cdapio/cdap-ui                       OT? A
-google-gemini/gemini-cli             OT? A
-# NOTE: gemini-cli previously worked — chained_e2e CI issue is a CONFIRMED DUP (do not re-file).
-#   Sweep it for NEW findings only (secrets / other workflows).
+# BLOCK Open Source bug bounty (Bugcrowd blockopensource / HackerOne square-open-source).
+# Eligibility: repo must have a BUG-BOUNTY.md. square/wire is explicitly in-scope.
+# Rewards real-impact only ($100-5k); hardening/P5 not paid. Secrets = highest value.
+afterpay/sdk-ios                     BLK A
+afterpay/sdk-android                 BLK A
+cashapp/cash-app-pay-ios-sdk         BLK A
+cashapp/cash-app-pay-android-sdk     BLK A
+cashapp/hermit                       BLK A
+cashapp/misk                         BLK A
+square/wire                          BLK A
