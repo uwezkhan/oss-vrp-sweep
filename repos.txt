@@ -1,32 +1,7 @@
-# Google OSS VRP sweep — batch 3 (NEW repos only; dupes from batch 1/2 removed).
-# priority A = non-flagship / newer / different surface (higher yield)
-# priority B = big ML/flagship libs (cheap secrets+zizmor scan)
-google/site-kit-wp                   OT? A
-ChromeDevTools/chrome-devtools-mcp   OT? A
-project-oak/oak                      OT? A
-shaka-project/shaka-player           OT? A
-flutter/devtools                     OT? A
-golang/vscode-go                     OT? A
-bazelbuild/remote-apis-sdks          OT? A
-googlemaps/android-maps-utils        OT? A
-Polymer/polymer                      OT? A
-dart-lang/sdk                        OT? A
-dart-lang/tools                      OT? A
-dart-lang/test                       OT? A
-dart-lang/build                      OT? A
-openxla/xla                          OT? B
-jax-ml/jax                           OT? B
-keras-team/keras                     OT? B
-keras-team/tf-keras                  OT? B
-tensorflow/tfjs                      OT? B
-tensorflow/models                    OT? B
-tensorflow/serving                   OT? B
-tensorflow/tflite-micro              OT? B
-tensorflow/tensorflow                OT? B
-google/fonts                         OT? B
-# EXCLUDED (not GitHub repos — would CLONE-FAIL):
-#   fuchsia/fuchsia/+/refs/heads/main/src/starnix/   -> googlesource path
-#   gerrit.googlesource.com/gerrit                   -> gerrit, not GitHub
-# ALREADY SWEPT CLEAN (batch 1/2 — do NOT re-run): benchmark clusterfuzz re2 go-github
-#   osv-scanner go-cloud closure-compiler filament flatbuffers zerocopy shaderc
-#   adk-python adk-js adk-go adk-java libphonenumber brotli XNNPACK gson guava gvisor
+# Google OSS VRP sweep — batch 4.
+# priority A = less-flagship / less-audited (higher yield)
+cdapio/cdap                          OT? A
+cdapio/cdap-ui                       OT? A
+google-gemini/gemini-cli             OT? A
+# NOTE: gemini-cli previously worked — chained_e2e CI issue is a CONFIRMED DUP (do not re-file).
+#   Sweep it for NEW findings only (secrets / other workflows).
