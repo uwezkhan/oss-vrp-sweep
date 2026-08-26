@@ -1,10 +1,4 @@
-# BLOCK Open Source bug bounty (Bugcrowd blockopensource / HackerOne square-open-source).
-# Eligibility: repo must have a BUG-BOUNTY.md. square/wire is explicitly in-scope.
-# Rewards real-impact only ($100-5k); hardening/P5 not paid. Secrets = highest value.
-afterpay/sdk-ios                     BLK A
-afterpay/sdk-android                 BLK A
-cashapp/cash-app-pay-ios-sdk         BLK A
-cashapp/cash-app-pay-android-sdk     BLK A
-cashapp/hermit                       BLK A
-cashapp/misk                         BLK A
-square/wire                          BLK A
+# ELECTRONEUM (Bugcrowd) — Legacy Blockchain codebase, IN SCOPE. P1 $5-12k / P2 $4-6k.
+# C++ Monero fork (node/daemon, RPC wallet, CLI wallet, blockchain tools).
+# NOTE: sweep = shallow (CI/secrets only). Real P1/P2 value is in C++ source + Monero-fork lag.
+electroneum/electroneum              BC A
